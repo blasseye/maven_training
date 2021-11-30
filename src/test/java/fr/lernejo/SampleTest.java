@@ -3,7 +3,7 @@ package fr.lernejo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 class SampleTest {
 
@@ -40,17 +40,23 @@ class SampleTest {
     }
 
     @Test
-    void fact_de_5() {
+    void fact_positif() {
         Sample s = new Sample();
         int resultat = 120;
         int test = s.fact(5);
         Assertions.assertEquals(test,resultat);
     }
     @Test
-    void fact_de_10() {
+    void fact_negatif() throws IllegalArgumentException {
         Sample s = new Sample();
-        int resultat = 3628800;
-        int test = s.fact(10);
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> s.fact(-5));
+    }
+
+    @Test
+    void fact_0() {
+        Sample s = new Sample();
+        int resultat = 1;
+        int test = s.fact(0);
         Assertions.assertEquals(test,resultat);
     }
 }
